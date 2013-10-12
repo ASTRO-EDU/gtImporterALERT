@@ -85,8 +85,8 @@ ifneq (, $(findstring ctarta, $(LINKERENV)))
 	LIBS += -L$(CTARTA)/lib -lpacket -lRTAtelem
 endif
 ifneq (, $(findstring mysql, $(LINKERENV)))
-        INCPATH += -I~/local/include
-	LIBS += -L~/local/lib -lmysqlcppconn
+        INCPATH += -I$(HOME)/local/include
+	LIBS += -L$(HOME)/local/lib -lmysqlcppconn
 endif
 #Insert the optional parameter to the compiler. The CFLAGS could be changed externally by the user
 CFLAGS   = -g 
