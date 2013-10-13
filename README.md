@@ -1,4 +1,4 @@
-BaseProject
+gtImporterALERT
 ===========
 
-Base project for C++
+C++ Project for inport AGILE alerts into the BDB from mySQL
