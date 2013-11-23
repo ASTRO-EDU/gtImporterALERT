@@ -185,7 +185,7 @@ all: exe
 
 lib: staticlib 
 	
-exe: makeobjdir $(OBJECTS)
+exe: makeobjdir makeslice $(OBJECTS)
 		test -d $(EXE_DESTDIR) || mkdir -p $(EXE_DESTDIR)
 		$(CC) $(CPPFLAGS) $(ALL_CFLAGS) -o $(EXE_DESTDIR)/$(EXE_NAME) $(OBJECTS_DIR)/*.o $(LIBS)
 	
@@ -211,6 +211,12 @@ makeobjdir:
 	
 makelibdir:
 	test -d $(LIB_DESTDIR) || mkdir -p $(LIB_DESTDIR)
+
+makeslice:
+	slice2cpp --output-dir code code/struttura.ice
+	slice2freeze --dict MapAlerts,int,Struttura::alerts --output-dir code MapAlerts code/struttura.ice
+	$(CC) $(CPPFLAGS) $(ALL_CFLAGS) -c $(SOURCE_DIR)/struttura.cpp -o $(OBJECTS_DIR)/struttura.o
+	$(CC) $(CPPFLAGS) $(ALL_CFLAGS) -c $(SOURCE_DIR)/MapAlerts.cpp -o $(OBJECTS_DIR)/MapAlerts.o
 
 #clean: delete all files from the current directory that are normally created by building the program. 
 clean:

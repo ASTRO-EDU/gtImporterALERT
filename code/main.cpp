@@ -53,6 +53,9 @@ int main(int argc, char* argv[]){
 			query += "WHERE alerts.skyregion_id = skyregions.id ";
 			query += "AND alerts.sciencealert_id = sciencealertsystems.id";
 		res = stmt->executeQuery(query);
+		std::cout << "l_peack\tb_peak\tt_start_mjd\tt_stop_mjd\tskyregion_id\tsciencealert_id\tsi_index\tfix_flag\tsrcloc_conf_level\tul_conf_level\tgal";
+		std::cout << "gale_err\tiso\tiso_err\tlabel\tsqrt_ts\tcounts\tcounts_err\tcounts_ul\tflux\tflux_err\tflux_UL\tspectral_index\tspectral_index_error\t";
+		std::cout << "l\tb\tr\tell_a\tell_b\tell_phi\tpath\tt_start_tt\tt_stop_tt\tt_start_o\tt_stop_o\tt_Start_utc\tt_stop_utc\texposoure\tid" << std::endl;
 		while (res->next()) {
 			tmp.lpeak = res->getDouble("l_peak");
 			tmp.bpeak = res->getDouble("b_peak");
@@ -97,6 +100,15 @@ int main(int argc, char* argv[]){
 			tmp.id = res->getInt("id");
 			// insert into the map
 			mapAl.insert(make_pair(tmp.id,tmp));
+			// show data insert in db
+			std::cout << tmp.lpeak << "\t" << tmp.bpeak << "\t" << tmp.tstartmjd << "\t" << tmp.tstopmjd << "\t" << tmp.skyregionid << "\t";
+			std::cout << tmp.sciencealertid << "\t" << tmp.siindex << "\t" << tmp.fixflag << "\t" << tmp.srclocconflevel << "\t";
+			std::cout << tmp.ulconflevel << "\t" << tmp.gal << "\t" << tmp.galerror << "\t" << tmp.iso << "\t" << tmp.isoerr << "\t";
+			std::cout << tmp.label << "\t" << tmp.sqrtts << "\t" << tmp.counts << "\t" << tmp.countserr << "\t" << tmp.countsul << "\t";
+			std::cout << tmp.flux << "\t" << tmp.fluxerr << "\t" << tmp.fluxUL << "\t" << tmp.spectralindex << "\t" << tmp.spectralindexerror;
+			std::cout << "\t" << tmp.l << "\t" << tmp.b << "\t" << tmp.r << "\t" << tmp.ella << "\t" << tmp.ellb << "\t" << tmp.ellphi << "\t";
+			std::cout << tmp.path << "\t" << tmp.tstarttt << "\t" << tmp.tstoptt << "\t" << tmp.tstarto << "\t" << tmp.tstopo << "\t";
+			std::cout << tmp.tstartutc << "\t" << tmp.tstoputc << "\t" << tmp.exposoure << "\t" << tmp.id << std::endl;
 		}
 		delete res;
 		delete stmt;
